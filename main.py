@@ -9,7 +9,8 @@ from Logger import Logger
 from dotenv import load_dotenv
 
 load_dotenv()
-CRON_INTERVAL = int(os.getenv('CRON_INTERVAL', 60))
+CRON_INTERVAL = int(os.getenv('CRON_INTERVAL', 86400))
+DELAY_BETWEEN_SCRAPE = int(os.getenv('DELAY_BETWEEN_SCRAPE', 30))
 
 
 def read_credentials_from_csv() -> List[Tuple[str, str]]:
@@ -39,6 +40,8 @@ def scrape_bearers_from_credentials(credentials: List[Tuple[str, str]]) -> None:
     for email, password in credentials:
         bearer_token = get_bearer_token(email, password)
         db.update_credential(email, bearer_token)
+        Logger.debug(f'Sleeping for {DELAY_BETWEEN_SCRAPE} seconds...')
+        time.sleep(DELAY_BETWEEN_SCRAPE)
 
     end_time = time.time()
     Logger.info(f"Scraping completed in {end_time - start_time:.2f} seconds")

@@ -10,13 +10,26 @@ This project is a Python-based tool for scraping and managing bearer tokens for 
 4. The `main.py` script runs in an infinite loop, checking the credentials and updating the database at a configurable interval (set by the `CRON_INTERVAL` environment variable).
 
 ## Setup
-1. Clone the repository: `git clone https://github.com/username/student-beans-cc-scraper.git`
-2. Install the required Python packages: `pip install -r requirements.txt`
-3. Set the necessary environment variables:
-   - `MONGODB_URI`: The connection string for your MongoDB database
-   - `MONGODB_DB_NAME`: The name of the database to use
-   - `CRON_INTERVAL`: The number of seconds between each scraping run (default is 60)
-4. Create a `credentials.csv` file in the project directory with the following format:
+1. Clone the repository: `https://github.com/chanpreet3000/student-beans-refresh-bearer`
+2. Create a virtual environment and activate it:
+   ```
+   cd student-beans-refresh-bearer
+   python -m venv .venv
+   source .venv/bin/activate
+   ```
+3. Install the required Python packages:
+   ```
+   pip install -r requirements.txt
+   ```
+4. Set the necessary environment variables:
+   ```
+   WEBSHARE_API_TOKEN=
+   MONGODB_DB_NAME=
+   MONGODB_URI=
+   CRON_INTERVAL=60
+   DELAY_BETWEEN_SCRAPE=30
+   ```
+5. Create a `credentials.csv` file in the project directory with the following format:
    ```
    email,password
    user1@example.com,password1
